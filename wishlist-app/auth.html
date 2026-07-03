@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Season Wishlist - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="landing">
+    <div class="landing-box">
+      <h1>🎁 Season Wishlist</h1>
+      <p id="formSubtitle">Sign in to your account</p>
+
+      <div id="registerFields" style="display:none">
+        <input type="text" id="regName" placeholder="Your name">
+      </div>
+
+      <input type="email" id="authEmail" placeholder="Email address">
+      <input type="password" id="authPassword" placeholder="Password">
+
+      <button onclick="submitAuth()">Continue →</button>
+
+      <p class="switch-text">
+        <span id="switchText">Don't have an account?</span>
+        <a onclick="toggleMode()" style="cursor:pointer;color:#302b63;font-weight:bold">
+          <span id="switchLink"> Sign up</span>
+        </a>
+      </p>
+    </div>
+    <p class="landing-tagline">Different wishlists for Different seasons...</p>
+  </div>
+
+  <script>
+    let isLogin = true;
+
+    function toggleMode() {
+      isLogin = !isLogin;
+      document.getElementById('registerFields').style.display = isLogin ? 'none' : 'block';
+      document.getElementById('formSubtitle').textContent = isLogin ? 'Sign in to your account' : 'Create your account';
+      document.getElementById('switchText').textContent = isLogin ? "Don't have an account?" : 'Already have an account?';
+      document.getElementById('switchLink').textContent = isLogin ? ' Sign up' : ' Log in';
+    }
+
+    async function submitAuth() {
+      const email = document.getElementById('authEmail').value.trim();
+      const password = document.getElementById('authPassword').value.trim();
+
+      if (!email || !password) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      if (isLogin) {
+        const res = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (data.error) return alert(data.error);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userName', data.name);
+        window.location.href = 'seasons.html';
+
+      } else {
+        const name = document.getElementById('regName').value.trim();
+        if (!name) return alert('Please enter your name');
+        const res = await fetch('http://localhost:3000/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+        const data = await res.json();
+        if (data.error) return alert(data.error);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userName', data.name);
+        window.location.href = 'seasons.html';
+      }
+    }
+  </script>
+
+</body>
+</html>

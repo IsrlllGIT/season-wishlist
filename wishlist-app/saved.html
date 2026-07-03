@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Saved Lists</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="seasons-page">
+    <h1>📋 Saved Lists</h1>
+    <p>All your wish lists in one place</p>
+
+    <div class="saved-lists" id="savedLists"></div>
+
+    <button class="back-btn" onclick="window.location.href='seasons.html'">
+      ← Back
+    </button>
+  </div>
+
+  <script>
+    const seasons = ['Summer', 'Autumn', 'Winter', 'Spring', 'Custom'];
+    const container = document.getElementById('savedLists');
+
+    seasons.forEach(season => {
+      const items = JSON.parse(localStorage.getItem('wishlist_' + season)) || [];
+      if (items.length === 0) return;
+
+      const card = document.createElement('div');
+      card.className = 'saved-card';
+      card.innerHTML = `
+        <h3>${season} Wish List</h3>
+        <p>${items.length} item${items.length > 1 ? 's' : ''}</p>
+        <button onclick="viewList('${season}')">View List →</button>
+      `;
+      container.appendChild(card);
+    });
+
+    if (container.innerHTML === '') {
+      container.innerHTML = '<p style="color:#aaa">No saved lists yet. Go create one!</p>';
+    }
+
+    function viewList(season) {
+      localStorage.setItem('currentSeason', season);
+      window.location.href = 'wishlist.html';
+    }
+  </script>
+
+</body>
+</html>

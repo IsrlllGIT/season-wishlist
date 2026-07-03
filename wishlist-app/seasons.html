@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Choose Your List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="seasons-page">
+    <h1>🎁 Hi, <span id="greeting"></span>!</h1>
+    <p>Choose a list to create or view</p>
+
+    <div class="seasons-grid">
+      <button class="season-btn summer" onclick="goToList('Summer')">
+        ☀️<br>Summer
+      </button>
+      <button class="season-btn autumn" onclick="goToList('Autumn')">
+        🍂<br>Autumn
+      </button>
+      <button class="season-btn winter" onclick="goToList('Winter')">
+        ❄️<br>Winter
+      </button>
+      <button class="season-btn spring" onclick="goToList('Spring')">
+        🌸<br>Spring
+      </button>
+    </div>
+
+    <div class="seasons-bottom">
+      <button class="season-btn custom" onclick="goToList('Custom')">
+        ✏️ Custom List
+      </button>
+      <button class="season-btn saved" onclick="window.location.href='saved.html'">
+        📋 Saved Lists
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const name = localStorage.getItem('userName') || 'Friend';
+    document.getElementById('greeting').textContent = name;
+
+    function goToList(season) {
+      localStorage.setItem('currentSeason', season);
+      window.location.href = 'wishlist.html';
+    }
+  </script>
+
+</body>
+</html>

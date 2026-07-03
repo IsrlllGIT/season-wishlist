@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Wish List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="banner">SEASON WISHLIST</div>
+
+    <div class="container">
+      <div class="top-bar">
+        <button
+          class="home-btn"
+          onclick="window.location.href = 'seasons.html'"
+        >
+          🎁
+        </button>
+      </div>
+      <div class="add-form">
+        <input
+          type="text"
+          id="itemName"
+          placeholder="Item name (e.g. AirPods)"
+        />
+        <input type="text" id="itemPrice" placeholder="Price (e.g. 99.99)" />
+        <input type="text" id="itemLink" placeholder="Amazon link" />
+        <button onclick="addItem()">Add to List</button>
+      </div>
+
+      <h2 id="listTitle">My Wish List</h2>
+      <p class="subtitle">Here's what I'd love this Summer</p>
+
+      <p id="summary" class="summary"></p>
+      <div class="list"></div>
+      <button class="share-btn" onclick="shareList()">🔗 Share My List</button>
+
+      <p class="owner" id="ownerTag"></p>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

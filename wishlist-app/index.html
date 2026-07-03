@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Season Wishlist</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="landing">
+    <div class="landing-box">
+      <h1>🎁 Season Wishlist</h1>
+      <p>Create your personal wish list and share it with family & friends</p>
+      <input type="text" id="userName" placeholder="Enter your name...">
+      <button onclick="createList()"> Get Started </button>
+    </div>
+    <p class="landing-tagline">Different wishlists for Different seasons...</p>
+  </div>
+
+  <script>
+    function createList() {
+      /*const name = document.getElementById('userName').value.trim();
+      if (!name) {
+        alert('Please enter your name');
+        return;
+      }
+      localStorage.setItem('userName', name);*/
+      window.location.href = 'auth.html'; 
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Wish List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<script src="app.js"></script>
+<body>
+
+  <div class="container">
+    <P class="brand">SEASON WISHLIST</P>
+    <h1>🎁 MY WISH LIST</h1>
+
+  <div class="add-form">
+    <input type="text" id="itemName" placeholder="Item name (e.g. AirPods)">
+    <input type="text" id="itemPrice" placeholder="Price (e.g. 99.99)">
+    <input type="text" id="itemLink" placeholder="Amazon link">
+    <button onclick="addItem()">Add to List</button>
+  </div>
+  <div class="list">
+
+  <p class="subtitle">Here's what I'd love this Summer</p>
+
+  </div>
+
+</body>
+<footer >
+  <p class="owner">Created by Bello . Summer 2026</p>
+</footer>
+</html> -->
