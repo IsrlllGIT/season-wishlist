@@ -15,7 +15,7 @@ function injectAffiliate(url) {
   try {
     const parsed = new URL(url);
     if (parsed.hostname.includes('amazon.com')) {
-      parsed.searchParams.set('tag', 'yourtaghere-20');
+      parsed.searchParams.set('tag', 'isrlllamzn-20');
       return parsed.toString();
     }
     return url;
@@ -55,7 +55,7 @@ function injectAffiliate(url) {
   try {
     const parsed = new URL(url);
     if (parsed.hostname.includes('amazon.com')) {
-      parsed.searchParams.set('tag', 'yourtaghere-20');
+      parsed.searchParams.set('tag', 'isrlllamzn-20');
       return parsed.toString();
     }
     return url;

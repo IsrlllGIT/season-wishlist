@@ -1,4 +1,4 @@
-const SERVER = 'http://localhost:3000';
+const SERVER = 'https://season-wishlist-api.onrender.com/';
 
 window.onload = async function() {
   const token = localStorage.getItem('token');
