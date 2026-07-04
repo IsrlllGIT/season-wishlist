@@ -164,10 +164,6 @@ app.post('/get-list', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
-});
-
 app.get('/share/:userId/:season', async (req, res) => {
   const { userId, season } = req.params;
 
@@ -181,3 +177,7 @@ app.get('/share/:userId/:season', async (req, res) => {
   if (!data) return res.status(404).json({ error: 'List not found' });
   res.json({ items: data.items });
  });
+
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});
