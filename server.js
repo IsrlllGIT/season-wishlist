@@ -86,7 +86,7 @@ app.post('/register', async (req, res) => {
   if (error) return res.status(400).json({ error: error.message });
 
   const token = jwt.sign({ id: data[0].id, name }, process.env.JWT_SECRET);
-  res.json({ token, name });
+  res.json({ token, name, id: data[0].id });
 });
 
 // ===== LOGIN =====
@@ -105,7 +105,7 @@ app.post('/login', async (req, res) => {
   if (!match) return res.status(400).json({ error: 'Wrong password' });
 
   const token = jwt.sign({ id: data.id, name: data.name }, process.env.JWT_SECRET);
-  res.json({ token, name: data.name });
+  res.json({ token, name, id: data.id });
 });
 
 // ===== SAVE LIST =====
@@ -167,3 +167,17 @@ app.post('/get-list', async (req, res) => {
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
 });
+
+app.get('/share/:userId/:season', async (req, res) => {
+  const { userId, season } = req.params;
+
+  const { data } = await supabase
+    .from('wishlist')
+    .select('items')
+    .eq('user_id', userId)
+    .eq('season', season)
+    .single();
+
+  if (!data) return res.status(404).json({ error: 'List not found' });
+  res.json({ items: data.items });
+ });

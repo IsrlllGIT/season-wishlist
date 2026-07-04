@@ -120,27 +120,23 @@ function updateSummary(items) {
 }
 
 function shareList() {
-  const name = localStorage.getItem('userName') || 'My';
-  const season = localStorage.getItem('currentSeason') || '';
-  const items = Array.from(document.querySelectorAll('.item')).map(el => ({
-    name: el.querySelector('.item-name').textContent,
-    price: el.querySelector('.price').textContent,
-    link: el.querySelector('.buy-btn').href
-  }));
+  const userId = localStorage.getItem('userId');
+  const season = localStorage.getItem('currentSeason');
+  const name = localStorage.getItem('userName');
 
-  if (items.length === 0) {
-    alert('Add some items first before sharing!');
+  if (!userId || !season) {
+    alert('Please add items first');
     return;
   }
 
-  const text = `🎁 ${name}'s ${season} Wish List\n\n` +
-    items.map(item => `• ${item.name} — ${item.price}\n  ${item.link}`).join('\n\n');
+  const shareUrl = `https://season-wishlist.netlify.app/view.html?user=${userId}&season=${season}`;
+  const text = `🎁 Check out ${name}'s ${season} Wish List!\n\n${shareUrl}`;
 
   if (navigator.share) {
-    navigator.share({ title: `${name}'s Wish List`, text });
+    navigator.share({ title: `${name}'s ${season} Wish List`, text, url: shareUrl });
   } else {
-    navigator.clipboard.writeText(text).then(() => {
-      alert('List copied to clipboard!');
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      alert('Link copied! Share it with family and friends.');
     });
   }
 }

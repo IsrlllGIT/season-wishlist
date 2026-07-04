@@ -75,6 +75,7 @@
         if (data.error) return alert(data.error);
         localStorage.setItem('token', data.token);
         localStorage.setItem('userName', data.name);
+        localStorage.setItem('userId', data.id);
         window.location.href = 'seasons.html';
       }
     }

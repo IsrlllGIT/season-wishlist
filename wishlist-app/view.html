@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wish List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="banner">SEASON WISHLIST</div>
+
+  <div class="container">
+    <h2 id="listTitle">Loading...</h2>
+    <p class="subtitle" id="subtitle"></p>
+    <p id="summary" class="summary"></p>
+    <div class="list" id="list"></div>
+    <p class="owner">Powered by Season Wishlist — <a href="https://season-wishlist.netlify.app">Create your own</a></p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get('user');
+    const season = params.get('season');
+
+    async function loadList() {
+      if (!userId || !season) {
+        document.getElementById('listTitle').textContent = 'List not found';
+        return;
+      }
+
+      const res = await fetch(`https://season-wishlist-api.onrender.com/share/${userId}/${season}`);
+      const data = await res.json();
+
+      if (data.error) {
+        document.getElementById('listTitle').textContent = 'List not found';
+        return;
+      }
+
+      document.getElementById('listTitle').textContent = season + ' Wish List';
+      document.getElementById('subtitle').textContent = "Here's what they'd love this " + season;
+
+      const list = document.getElementById('list');
+      const items = data.items || [];
+
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <span class="item-name">${item.name}</span>
+          <span class="price">$${item.price}</span>
+          <a href="${item.link}" class="buy-btn" target="_blank">Buy on Amazon</a>
+        `;
+        list.appendChild(div);
+      });
+
+      const total = items.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0);
+      document.getElementById('summary').innerHTML =
+        `${items.length} item${items.length !== 1 ? 's' : ''} · Total: <strong>$${total.toFixed(2)}</strong>`;
+    }
+
+    loadList();
+  </script>
+
+</body>
+</html>
