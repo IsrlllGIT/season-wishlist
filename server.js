@@ -105,7 +105,7 @@ app.post('/login', async (req, res) => {
   if (!match) return res.status(400).json({ error: 'Wrong password' });
 
   const token = jwt.sign({ id: data.id, name: data.name }, process.env.JWT_SECRET);
-  res.json({ token, name, id: data.id });
+  res.json({ token, name: data.name, id: data.id });
 });
 
 // ===== SAVE LIST =====
