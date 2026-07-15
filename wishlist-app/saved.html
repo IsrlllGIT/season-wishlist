@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Saved Lists</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -19,32 +20,59 @@
   </div>
 
   <script>
-    const seasons = ['Summer', 'Autumn', 'Winter', 'Spring', 'Custom'];
-    const container = document.getElementById('savedLists');
+  const token = localStorage.getItem("token");
+  const name = localStorage.getItem("userName");
+  const container = document.getElementById("savedLists");
 
-    seasons.forEach(season => {
-      const items = JSON.parse(localStorage.getItem('wishlist_' + season)) || [];
-      if (items.length === 0) return;
+  if (!token) {
+    window.location.href = "auth.html";
+  }
 
-      const card = document.createElement('div');
-      card.className = 'saved-card';
+  const seasons = ["Summer", "Autumn", "Winter", "Spring", "Custom"];
+
+  async function loadSavedLists() {
+    let hasAny = false;
+
+    for (const season of seasons) {
+      const res = await fetch(
+        "https://season-wishlist-api.onrender.com/get-list",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token, season }),
+        },
+      );
+      const data = await res.json();
+      const items = data.items || [];
+
+      if (items.length === 0) continue;
+      hasAny = true;
+
+      const card = document.createElement("div");
+      card.className = "saved-card";
       card.innerHTML = `
-        <h3>${season} Wish List</h3>
-        <p>${items.length} item${items.length > 1 ? 's' : ''}</p>
+        <div>
+          <h3>${season} Wish List</h3>
+          <p>${items.length} item${items.length > 1 ? "s" : ""}</p>
+        </div>
         <button onclick="viewList('${season}')">View List →</button>
       `;
       container.appendChild(card);
-    });
-
-    if (container.innerHTML === '') {
-      container.innerHTML = '<p style="color:#aaa">No saved lists yet. Go create one!</p>';
     }
 
-    function viewList(season) {
-      localStorage.setItem('currentSeason', season);
-      window.location.href = 'wishlist.html';
+    if (!hasAny) {
+      container.innerHTML =
+        '<p style="color:#aaa">No saved lists yet. Go create one!</p>';
     }
-  </script>
+  }
+
+  function viewList(season) {
+    localStorage.setItem("currentSeason", season);
+    window.location.href = "wishlist.html";
+  }
+
+  loadSavedLists();
+</script>
 
 </body>
 </html>

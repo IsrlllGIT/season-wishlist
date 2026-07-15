@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Season Wishlist - Login</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <div class="landing">
@@ -26,6 +29,10 @@
         <a onclick="toggleMode()" style="cursor:pointer;color:#302b63;font-weight:bold">
           <span id="switchLink"> Sign up</span>
         </a>
+      <p style="text-align:center; margin-top:15px; font-size:0.8rem; color:#888">
+        Having issues?
+        <a href="mailto:support.seasonwishlist@gmail.com" style="color:#302b63">Contact Support</a>
+      </p>
       </p>
     </div>
     <p class="landing-tagline">Different wishlists for Different seasons...</p>
@@ -61,6 +68,7 @@
         if (data.error) return alert(data.error);
         localStorage.setItem('token', data.token);
         localStorage.setItem('userName', data.name);
+        localStorage.setItem('userId', data.id);
         window.location.href = 'seasons.html';
 
       } else {
@@ -82,4 +90,5 @@
   </script>
 
 </body>
+
 </html>

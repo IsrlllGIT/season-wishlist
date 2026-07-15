@@ -1,41 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Season Wishlist</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Season Wishlist" />
+    <meta
+      property="og:description"
+      content="Create and share your personal wish list for every season"
+    />
+    <meta
+      property="og:image"
+      content="https://season-wishlist.netlify.app/cover.jpg"
+    />
+    <meta property="og:url" content="https://season-wishlist.netlify.app" />
+    <meta property="og:type" content="website" />
 
-  <div class="landing">
-    <div class="landing-box">
-      <h1>🎁 Season Wishlist</h1>
-      <p>Create your personal wish list and share it with family & friends</p>
-      <input type="text" id="userName" placeholder="Enter your name...">
-      <button onclick="createList()"> Get Started </button>
+    <!-- For WhatsApp and Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://season-wishlist.netlify.app/cover.jpg"
+    />
+    <title>Season Wishlist</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="landing">
+      <div class="landing-box">
+        <h1>🎁 Season Wishlist</h1>
+        <p>Create your personal wish list and share it with family & friends</p>
+        <input type="text" id="userName" placeholder="Enter your name..." />
+        <button onclick="createList()">Get Started</button>
+      </div>
+      <p class="landing-tagline">
+        Different wishlists for Different seasons...
+      </p>
     </div>
-    <p class="landing-tagline">Different wishlists for Different seasons...</p>
-  </div>
 
-  <script>
-    function createList() {
-      /*const name = document.getElementById('userName').value.trim();
+    <script>
+      function createList() {
+        /*const name = document.getElementById('userName').value.trim();
       if (!name) {
         alert('Please enter your name');
         return;
       }
       localStorage.setItem('userName', name);*/
-      window.location.href = 'auth.html'; 
-    }
-  </script>
-
-</body>
+        window.location.href = "auth.html";
+      }
+    </script>
+  </body>
 </html>
-
-
-
-
-
 
 <!-- <!DOCTYPE html>
 <html lang="en">

@@ -1,4 +1,4 @@
-const SERVER = 'https://season-wishlist-api.onrender.com/';
+const SERVER = 'https://season-wishlist-api.onrender.com';
 
 window.onload = async function() {
   const token = localStorage.getItem('token');
@@ -6,7 +6,9 @@ window.onload = async function() {
     window.location.href = 'auth.html';
     return;
   }
-
+  
+  document.getElementById('subtitle').textContent = "Here's what I'd love this " + seasons;
+  
   const name = localStorage.getItem('userName') || 'My';
   const season = localStorage.getItem('currentSeason') || 'My';
 
@@ -129,7 +131,7 @@ function shareList() {
     return;
   }
 
-  const shareUrl = `https://season-wishlist.netlify.app/view.html?user=${userId}&season=${season}`;
+  const shareUrl = `https://season-wishlist.netlify.app/view.html?user=${userId}&season=${season}&name=${encodeURIComponent(name)}`;
   const text = `🎁 Check out ${name}'s ${season} Wish List!\n\n${shareUrl}`;
 
   if (navigator.share) {

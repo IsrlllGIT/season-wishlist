@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wish List</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -36,7 +37,8 @@
         return;
       }
 
-      document.getElementById('listTitle').textContent = season + ' Wish List';
+      const ownerName = params.get('name') || 'Someone';
+      document.getElementById('listTitle').textContent = ownerName + "'s " + season + ' Wish List';
       document.getElementById('subtitle').textContent = "Here's what they'd love this " + season;
 
       const list = document.getElementById('list');
